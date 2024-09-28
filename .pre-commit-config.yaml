@@ -3,8 +3,9 @@ repos:
   rev: v0.6.4
   hooks:
   - id: ruff-format
-    exclude: examples
+    args: [--show-fixes]
   - id: ruff
+    args: [--show-fixes]
 - repo: https://github.com/python-jsonschema/check-jsonschema
   rev: 0.29.2
   hooks:
