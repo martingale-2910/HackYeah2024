@@ -1,7 +1,5 @@
 import click
 
-from hackyeah2024.server import run_server
-
 
 @click.group()
 def main():
