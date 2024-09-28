@@ -1,5 +1,6 @@
 selenium
 dash
+dash_leaflet
 flask
 openai
 pep8
