@@ -8,7 +8,7 @@ bounding_box = {'min_lat': 49.174522, 'max_lat': 50.526524, 'min_lon': 19.076385
 
 def get_route_points(start, end):
     G = graph_from_bbox(
-        bbox=(bounding_box['max_lon'], bounding_box['min_lon'], bounding_box['min_lat'], bounding_box['max_lat']),
+        bbox=(bounding_box['max_lat'], bounding_box['min_lat'], bounding_box['min_lon'], bounding_box['max_lon']),
         network_type='bike',
         simplify=False,
     )
