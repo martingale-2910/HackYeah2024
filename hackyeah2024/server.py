@@ -1,5 +1,5 @@
 import dash_leaflet as dl
-from dash import Dash, html
+from dash import Dash
 
 
 def run_server():
@@ -15,12 +15,11 @@ def run_server():
     #         style={'width': '100%', 'height': '50vh', 'margin': "auto", "display": "block"}, id="map"),
     # ])
 
-
     app = Dash()
     app.layout = dl.Map(dl.TileLayer(), center=[56, 10], zoom=6, style={'height': '50vh'})
 
     app.run_server()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     run_server()
