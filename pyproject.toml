@@ -10,7 +10,7 @@ dependencies = [
     "streamlit_folium",
     "taxicab",
     "osmnx",
-    "scikt-learn",
+    "scikit-learn",
 ]
 
 

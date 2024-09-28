@@ -48,6 +48,8 @@ jinja2==3.1.4
     #   folium
     #   pydeck
     #   streamlit-folium
+joblib==1.4.2
+    # via scikit-learn
 jsonschema==4.23.0
     # via altair
 jsonschema-specifications==2023.12.1
@@ -79,11 +81,15 @@ numpy==2.1.1
     #   pyarrow
     #   pydeck
     #   pyogrio
+    #   scikit-learn
+    #   scipy
     #   shapely
     #   streamlit
     #   taxicab
 osmnx==1.9.3
-    # via taxicab
+    # via
+    #   hackyeah2024 (pyproject.toml)
+    #   taxicab
 packaging==24.1
     # via
     #   altair
@@ -135,6 +141,10 @@ rpds-py==0.20.0
     # via
     #   jsonschema
     #   referencing
+scikit-learn==1.5.2
+    # via hackyeah2024 (pyproject.toml)
+scipy==1.14.1
+    # via scikit-learn
 shapely==2.0.6
     # via
     #   geopandas
@@ -154,6 +164,8 @@ taxicab==0.0.3
     # via hackyeah2024 (pyproject.toml)
 tenacity==8.5.0
     # via streamlit
+threadpoolctl==3.5.0
+    # via scikit-learn
 toml==0.10.2
     # via streamlit
 tornado==6.4.1
