@@ -1,17 +1,24 @@
 import folium
 import streamlit as st
-from osmnx import distance, geocoder, graph_from_bbox, routing, features_from_bbox
+from osmnx import distance, features_from_bbox, geocoder, graph_from_bbox, routing
 from streamlit_folium import st_folium
 
 bounding_box = {'min_lat': 49.174522, 'max_lat': 50.526524, 'min_lon': 19.076385, 'max_lon': 21.432953}
 
 
-def get_route_points(start, end):
-    G = graph_from_bbox(
+@st.cache_resource
+def get_graph():
+    return graph_from_bbox(
         bbox=(bounding_box['max_lat'], bounding_box['min_lat'], bounding_box['min_lon'], bounding_box['max_lon']),
         network_type='bike',
         simplify=False,
+        retain_all=True,
     )
+
+
+@st.cache_data
+def get_route_points(start, end):
+    G = get_graph()
     orig = geocoder.geocode(start)
     dest = geocoder.geocode(end)
     o, _ = distance.nearest_nodes(G, orig[1], orig[0], return_dist=True)
@@ -28,13 +35,23 @@ def plot_route(map_, route_pts):
     return map
 
 
+@st.cache_data
+def get_localities():
+    print('Fetching localities')
+    x = tuple(
+        features_from_bbox(
+            bbox=(bounding_box['max_lat'], bounding_box['min_lat'], bounding_box['min_lon'], bounding_box['max_lon']),
+            tags={'place': ['town', 'vilage']},
+        )['name'].values
+    )
+    print('Fetched localities')
+    return x
+
+
 def run_server():
     st.title('Rowerem przez Małopolskę')
 
-    localities = tuple(features_from_bbox(
-        bbox=(bounding_box['max_lat'], bounding_box['min_lat'], bounding_box['min_lon'], bounding_box['max_lon']),
-        tags={"place": ["town", "vilage"]})['name'].values
-        )
+    localities = get_localities()
 
     cont1 = st.container()
 
@@ -42,10 +59,10 @@ def run_server():
         col1, col2 = st.columns(2)
 
         with col1:
-            origin = st.selectbox("Skąd", localities)
+            origin = st.selectbox('Skąd', localities)
 
         with col2:
-            destination = st.selectbox("Dokąd", localities)
+            destination = st.selectbox('Dokąd', localities)
 
     cont2 = st.container()
 
