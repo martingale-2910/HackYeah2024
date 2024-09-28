@@ -1,6 +1,6 @@
 import click
 
-from hackyeah2024.server import run_dash, run_flask, run_selenium
+from hackyeah2024.server import run_server
 
 
 @click.group()
@@ -8,27 +8,15 @@ def main():
     print("Running main CLI")
 
 
-@main.group()
-def run_server():
+@main.command()
+def dummy():
+    print("Running a dummy script")
+
+
+@main.command()
+def server():
     print("Running server")
-
-
-@run_server.command()
-def dash():
-    print("Running Dash")
-    run_dash()
-
-
-@run_server.command()
-def flask():
-    print("Running Flask")
-    run_flask()
-
-
-@run_server.command()
-def selenium():
-    print("Running Selenium")
-    run_selenium()
+    run_server()
 
 
 if __name__ == "__main__":
