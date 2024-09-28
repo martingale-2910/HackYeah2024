@@ -16,7 +16,6 @@ def dummy():
 @main.command()
 def server():
     print('Running server')
-    run_server()
 
 
 if __name__ == '__main__':
